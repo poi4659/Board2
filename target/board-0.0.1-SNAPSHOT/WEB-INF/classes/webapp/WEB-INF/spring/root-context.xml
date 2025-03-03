@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans file:///C:/schema/spring-beans.xsd 
+	http://www.springframework.org/schema/context file:///C:/schema/spring-context.xsd 
+	http://www.springframework.org/schema/jdbc file:///C:/schema/spring-jdbc.xsd 
+	http://www.springframework.org/schema/tx file:///C:/schema/spring-tx.xsd 
+	http://mybatis.org/schema/mybatis-spring https://mybatis.org/schema/mybatis-spring.xsd">
+
+	<!--빈의 등록 여부와 관계없이 어노테이션을 활성화 -->
+	<!-- jin.spring.board 패키지, 그 하위 패키지까지 자동 빈 등록 -->
+	<context:component-scan
+		base-package="jin.spring.board" />
+
+	<!-- 데이터베이스 연결 정보 설정 -->
+	<!-- HikariCP(고성능 커넥션 풀 라이브러리) 사용하는 데이터 소스 빈을 생성 -->
+	<!-- close: 애플리케이션 종료 시 데이터베이스 연결을 닫도록 설정 -->
+	<bean class="com.zaxxer.hikari.HikariDataSource"
+		id="hikariDataSource" destroy-method="close">
+		<!-- 데이터베이스 연결에 사용될 JDBC 드라이버 클래스를 설정 -->
+		<property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+
+		<!-- 실제 데이터베이스 연결에 사용되는 JDBC URL을 설정 -->
+		<!-- Oracle 데이터베이스에 연결하는 URL -->
+		<!-- 127.0.0.1:1521:xe: 데이터베이스 서버의 호스트 주소와 포트, SID(서비스 식별자) -->
+		<property name="jdbcUrl"
+			value="jdbc:log4jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+
+		<!-- 데이터베이스에 접속할 사용자 이름, 암호 설정 -->
+		<property name="username" value="jsql" />
+		<property name="password" value="1234" />
+	</bean>
+
+	<!-- MyBatis 설정 -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
+		id="sqlSessionFactoryBean">
+		<!-- 데이터소스 참조하여 DB 연결 -->
+		<property name="dataSource" ref="hikariDataSource" />
+
+		<!-- MyBatis 설정 파일 로드하여 설정 적용 -->
+		<property name="configLocation"
+			value="classpath:/configuration/config.xml" />
+
+		<!-- mapper 파일을 로드하여 SQL 매핑 -->
+		<property name="mapperLocations"
+			value="classpath:/mapper/boardMapper.xml" />
+	</bean>
+
+	<!-- MyBatis의 SQL 실행을 도와주는 객체 -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate"
+		id="sqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean" />
+	</bean>
+
+	<!-- 트랜잭션 매니저 설정 -->
+	<bean
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		id="transactionManager">
+		<property name="dataSource" ref="hikariDataSource" />
+	</bean>
+
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+</beans>
