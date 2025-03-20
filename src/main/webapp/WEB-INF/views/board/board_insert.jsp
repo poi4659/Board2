@@ -10,6 +10,36 @@
 <script src="./js/jquery-3.5.1.min.js" type="text/javascript"></script>
 <script src="./js/bootstrap.min_4.5.0.js" type="text/javascript"></script>
 <script src="./js/jquery.validate.min.js" type="text/javascript"></script>
+
+<script>
+    $(document).ready(function() {
+        $("form").submit(function(event) {
+            var title = $("#bdTitle").val().trim();
+            var content = $("#bdContent").val().trim();
+            var writer = $("#bdWriter").val().trim();
+
+            if (title === "") {
+                alert("제목을 입력하세요.");
+                $("#bdTitle").focus();
+                return false; // 폼 제출 방지
+            }
+
+            if (content === "") {
+                alert("내용을 입력하세요.");
+                $("#bdContent").focus();
+                return false; // 폼 제출 방지
+            }
+
+            if (writer === "") {
+                alert("작성자를 입력하세요.");
+                $("#bdWriter").focus();
+                return false; // 폼 제출 방지
+            }
+        });
+    });
+</script>
+
+
 </head>
 <body>
 	<header id="main-header" class="py-2 btn-dark text-white">
