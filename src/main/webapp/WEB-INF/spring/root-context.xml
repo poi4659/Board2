@@ -5,10 +5,10 @@
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans file:///C:/schema/spring-beans.xsd 
-	http://www.springframework.org/schema/context file:///C:/schema/spring-context.xsd 
-	http://www.springframework.org/schema/jdbc file:///C:/schema/spring-jdbc.xsd 
-	http://www.springframework.org/schema/tx file:///C:/schema/spring-tx.xsd 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans file:///Library/schema/spring-beans.xsd 
+	http://www.springframework.org/schema/context file:///Library/schema/spring-context.xsd 
+	http://www.springframework.org/schema/jdbc file:///Library/schema/spring-jdbc.xsd 
+	http://www.springframework.org/schema/tx file:///Library/schema/spring-tx.xsd 
 	http://mybatis.org/schema/mybatis-spring https://mybatis.org/schema/mybatis-spring.xsd">
 
 	<!--빈의 등록 여부와 관계없이 어노테이션을 활성화 -->
@@ -31,11 +31,11 @@
 		<property name="jdbcUrl"
 			value="jdbc:log4jdbc:oracle:thin:@127.0.0.1:1521:xe" />
 
-		<!-- 데이터베이스에 접속할 사용자 이름, 암호 설정 -->
+			<!-- 데이터베이스에 접속할 사용자 이름, 암호 설정 -->
 		<property name="username" value="jboard" />
 		<property name="password" value="1234" />
 	</bean>
-
+	
 	<!-- MyBatis 설정 -->
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
 		id="sqlSessionFactoryBean">

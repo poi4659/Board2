@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +14,20 @@
 <link rel="stylesheet" type="text/css" href="./css/global.css">
 <script src="./js/jquery-3.5.1.min.js" type="text/javascript"></script>
 <script src="./js/bootstrap.min_4.5.0.js" type="text/javascript"></script>
+
+<style type="text/css">
+/* 페이지 버튼 가로 정렬 */
+ul {
+	list-style: none;
+	padding: 0;
+	text-align: center;
+	margin: 0 auto; /* 가로로 중앙 정렬 */
+}
+li{
+	display: inline-block; /* 가로로 나열 */
+	padding: 10px;
+}
+</style>
 </head>
 <body>
 	<header id="main-header" class="py-2 btn-dark text-white">
@@ -66,10 +81,32 @@
 									</c:if>
 								</tbody>
 							</table>
+
 							<div>
 								<%-- 클릭 시 ./BoardInsert로 이동하여 게시글 내용을 입력할 수 있는 페이지로 리디렉션 --%>
 								<a href="./BoardInsert" class="btn btn-success btn-block">
 									게시글 작성</a>
+							</div>
+							
+							<!-- 페이징 처리 -->
+							<div style="margin-top: 30px;">
+								<ul >
+									<c:if test="${pageMaker.prev}">
+										<li><a
+											href="./BoardList${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+									</c:if>
+
+									<c:forEach begin="${pageMaker.startPage}"
+										end="${pageMaker.endPage}" var = "idx">
+										<li><a href="./BoardList${pageMaker.makeQuery(idx)}">${idx}</a></li>
+									</c:forEach>
+
+									<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+										<li><a
+											href="./BoardList${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+									</c:if>
+
+								</ul>
 							</div>
 						</div>
 					</div>

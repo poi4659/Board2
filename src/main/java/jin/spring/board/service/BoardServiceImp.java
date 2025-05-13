@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import jin.spring.board.controller.BoardController;
 import jin.spring.board.dao.BoardDAO;
 import jin.spring.board.dto.BoardDTO;
+import jin.spring.board.dto.Criteria;
 import lombok.RequiredArgsConstructor;
 
 //Spring이 BoardServiceImp를 "서비스 빈"으로 자동 등록
@@ -43,21 +44,21 @@ public class BoardServiceImp implements BoardService {
 	}
 
 //	게시판 목록 조회
+//	Criteria 객체를 매개변수로 받아서 페이징 정보를 전달
 	@Override
-	public List<BoardDTO> boardSelectAll() throws Exception {
-		logger.info("boardSelectAll() 메서드 호출");
-
-		List<BoardDTO> boardList = boardDAO.selectAll();
-
-		if (boardList == null) {
-			logger.warn("게시글 목록이 null입니다.");
-		} else if (boardList.isEmpty()) {
-			logger.warn("게시글 목록이 비어있습니다.");
-		} else {
-			logger.info("게시글 목록 조회 완료: " + boardList.size() + "개의 게시글이 조회되었습니다.");
-		}
-
-		return boardList;
+	public List<BoardDTO> boardList(Criteria criteria) throws Exception {
+//		DAO 계층의 list(criteria) 메서드를 호출하여 
+//		페이징된 게시글 목록을 가져옴
+//		결과를 List<BoardDTO> 형태로 반환
+		return boardDAO.list(criteria);
+	}
+	
+//	게시글 총 갯수
+	@Override
+	public int listCount() throws Exception {
+//		DAO 계층의 listCount() 메서드를 호출하여 게시글 개수를 가져옴.
+//		결과를 int 타입으로 반환
+		return boardDAO.listCount();
 	}
 
 //	게시판 글 상세 조회
@@ -86,5 +87,6 @@ public class BoardServiceImp implements BoardService {
 		 */
 		boardDAO.delete(bdNum);
 	}
+
 
 }

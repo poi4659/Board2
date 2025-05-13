@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jin.spring.board.dto.BoardDTO;
+import jin.spring.board.dto.Criteria;
+import jin.spring.board.dto.PageMaker;
 import jin.spring.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 
@@ -45,13 +47,27 @@ public class BoardController {
 		return "redirect:/BoardList";
 	}
 	
-//	게시판 목록 조회
+//	게시판 목록 조회-페이징된 목록만 가져옴 
+//	Criteria: 페이징에 필요한 데이터를 담고 있는 객체
+//	클릭된 페이지 번호가 Controller로 전달될 때, 그 값들이 Criteria 객체로 매핑됨 
 	@GetMapping("/BoardList")
-	public String list(Model model) throws Exception {
+	public String list(Model model, Criteria criteria) throws Exception {
 	    logger.info("list");
 	    
-//	    게시글 목록을 모델에 추가
-	    model.addAttribute("list", boardService.boardSelectAll());
+//	    criteria: 페이징 처리를 위한 데이터를 담고 있으며, 이 값을 통해 페이징된 게시글 목록을 가져옴
+//	    현재 페이지에 해당하는 게시글 목록만 모델에 추가
+	    model.addAttribute("list", boardService.boardList(criteria));
+	    
+//	    페이지 네비게이션을 위한 객체 생성 
+	    PageMaker pageMaker = new PageMaker();
+//	    현재 페이지와 페이지 당 게시글 수를 Criteria 객체에서 설정한 값으로 설정
+	    pageMaker.setCri(criteria);
+	    
+//	    총 게시글 수를 가져와서 PageMaker 객체에 설정하여 전체 페이지 수를 계산함 
+	    pageMaker.setTotalCount(boardService.listCount());
+	    
+//	    모델에 pageMaker 추가 
+	    model.addAttribute("pageMaker", pageMaker);
 	    
 //	   	게시판 목록 조회 페이지로 이동
 	    return "./board/board_select";

@@ -4,9 +4,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc file:///C:/schema/spring-mvc.xsd 
-	http://www.springframework.org/schema/beans file:///C:/schema/spring-beans.xsd 
-	http://www.springframework.org/schema/context file:///C:/schema/spring-context.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc file:///Library/schema/spring-mvc.xsd 
+	http://www.springframework.org/schema/beans file:///Library/schema/spring-beans.xsd 
+	http://www.springframework.org/schema/context file:///Library/schema/spring-context.xsd">
 	
 	<!--웹 요청을 처리하는 어노테이션(예: @RequestMapping, @GetMapping, @PostMapping 등)을 활성화, 
 	빈을 검색하거나 매핑 할 수 없음 -->

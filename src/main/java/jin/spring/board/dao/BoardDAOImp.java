@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import jin.spring.board.dto.BoardDTO;
+import jin.spring.board.dto.Criteria;
 import lombok.RequiredArgsConstructor;
 
 /*	
@@ -33,16 +34,30 @@ public class BoardDAOImp implements BoardDAO {
 	}
 
 //	게시판 목록 조회
+//	페이징 처리 추가
 	@Override
-	public List<BoardDTO> selectAll() throws Exception {
+	public List<BoardDTO> list(Criteria criteria) throws Exception {
 		/*
 		 * XML 매퍼 파일에서 namespace="jin.spring.board"와 id="selectAll"에 해당하는 
 		 * SQL 쿼리를 실행 
 		 * selectList() → 여러 개의 결과(List<BoardDTO>)를 조회할 때 사용
+		 * criteria를 매개변수로 넘겨서 페이징 정보를 SQL에 적용
 		 */
-		return sqlSessionTemplate.selectList("jin.spring.board.selectAll");
+		return sqlSessionTemplate.selectList("jin.spring.board.listPage", criteria);
 	}
 
+//	게시글 총 갯수
+	@Override
+	public int listCount() throws Exception {
+		/*
+		 * XML 매퍼 파일에서 namespace="jin.spring.board"와 id="selectAll"에 해당하는 
+		 * SQL 쿼리를 실행
+		 * selectOne()를 사용하여 단일 값(int)을 가져옴
+		 * 게시글 총 개수를 조회하여 반환
+		 */
+		return sqlSessionTemplate.selectOne("jin.spring.board.listCount");
+	}
+	
 //	게시판 글 상세 조회
 	@Override
 	public BoardDTO select(int bdNum) throws Exception {
@@ -78,5 +93,7 @@ public class BoardDAOImp implements BoardDAO {
 		 */
 		sqlSessionTemplate.delete("jin.spring.board.delete", bdNum);
 	}
+
+
 
 }
