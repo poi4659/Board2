@@ -1,0 +1,11 @@
+package jin.spring.board.member.service;
+
+import jin.spring.board.member.dto.MemberDTO;
+
+public interface MemberService {
+//	회원가입 
+	public void memberRegister(MemberDTO memberDTO) throws Exception;
+	
+//	로그인 
+	public MemberDTO memberLogin(MemberDTO memberDTO) throws Exception;
+}

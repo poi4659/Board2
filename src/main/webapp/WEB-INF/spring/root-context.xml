@@ -47,8 +47,9 @@
 			value="classpath:/configuration/config.xml" />
 
 		<!-- mapper 파일을 로드하여 SQL 매핑 -->
+		<!-- /mapper 폴더 안에 있는 모든 .xml 매퍼 파일이 자동으로 인식됨 -->		
 		<property name="mapperLocations"
-			value="classpath:/mapper/boardMapper.xml" />
+			value="classpath:/mapper/*.xml"/>
 	</bean>
 
 	<!-- MyBatis의 SQL 실행을 도와주는 객체 -->

@@ -8,9 +8,11 @@
 	<!--별칭 환경을 설정한다. -->
 	<typeAliases>
 		<!--BoardDTO 클래스에 대한 별칭을 설정한다. -->
-		<typeAlias alias="BoardDTO"
-			type="jin.spring.board.dto.BoardDTO" />
+		<typeAlias alias="BoardDTO" type="jin.spring.board.dto.BoardDTO" />
 		<!-- Criteria 별칭 추가 -->
 		<typeAlias alias="Criteria" type="jin.spring.board.dto.Criteria" />
+		
+		<!-- MemberDTO 별칭 추가 -->
+		<typeAlias alias="MemberDTO" type="jin.spring.board.member.dto.MemberDTO" />
 	</typeAliases>
 </configuration>

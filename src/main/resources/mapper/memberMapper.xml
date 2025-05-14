@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--https://mybatis.org/dtd/mybatis-3-mapper.dtd가 다운로드되지 않으면 <a> 태그로 다운해서 
+	로컬로 등록한다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "file:///Library/schema/mybatis-3-mapper.dtd">
+
+<!-- 네임스페이스의 충돌을 방지하기 위해 설정한다. -->
+<mapper namespace="jin.spring.member">
+	<!-- 회원가입 -->
+	<insert id="register">
+		INSERT INTO member(mbid, mbpw, mbname)
+		VALUES(#{mbId}, #{mbPw}, #{mbName})
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="login" resultType="MemberDTO">
+		select mbid, mbpw from member
+		where mbid = #{mbId} AND mbpw = #{mbPw}
+	</select>
+</mapper>
