@@ -4,7 +4,7 @@ package jin.spring.board.member.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-
+import jin.spring.board.controller.BoardController;
 import jin.spring.board.member.dto.MemberDTO;
 import jin.spring.board.member.service.MemberService;
 import jin.spring.board.member.service.MemberServiceImp;
@@ -20,6 +20,8 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
+
+    private final BoardController boardController;
 
     private final MemberServiceImp memberServiceImp;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
@@ -42,8 +44,8 @@ public class MemberController {
 		
 		memberService.memberRegister(memberDTO);
 		
-//		절대 경로로 지정하여 중복 경로가 발생하지 않도록 함->수정 필요
-		return "redirect:/MemberRegister";
+//		게시판 목록으로 이동
+		return "redirect:/BoardList";
 	}
 	
 //	login 뷰 GET
@@ -131,5 +133,46 @@ public class MemberController {
 		return "redirect:/MemberLogin";
 	}
 	
+//	회원탈퇴 GET
+	@GetMapping("/MemberDelete")
+	public String delete() {
+		logger.info("회원탈퇴 폼 뷰");
+		
+//		회원탈퇴 뷰 반환 
+		return "./member/member_delete";
+	}
+	
+	
+//	회원탈퇴 POST
+	@PostMapping("/MemberDelete")
+	public String delete(MemberDTO memberDTO, HttpSession session, RedirectAttributes rttr) throws Exception {
+		logger.info("회원탈퇴");
+		
+//		세션에서 로그인된 회원 정보 가져옴 
+		MemberDTO sessionMember = (MemberDTO) session.getAttribute("member");
+		
+//		세션에서 가져온 실제 비밀번호 
+		String sessionPw = sessionMember.getMbPw();
+		
+//		탈퇴 폼에서 입력한 비밀번호
+		String memberDTOPw = memberDTO.getMbPw();
+		
+//		세션에 있는 비밀번호와 DTO에 담기는 비밀번호 일치해야 회원 탈퇴 
+//		일치하지 않으면 msg에 false 값 담아서 뷰로 전달 
+//		비밀번호 불일치 시
+	    if (!sessionPw.equals(memberDTOPw)) {
+	        rttr.addFlashAttribute("pwError", false); // 에러 표시용 플래시 속성
+	        return "redirect:/MemberDelete"; // 탈퇴 폼으로 이동
+	    }
+		
+//		비밀번호가 일치하면 탈퇴 처리 진행 
+		memberService.memberDelete(memberDTO);
+		
+//		세션 종료 
+		session.invalidate();
+		
+//		게시판 목록으로 이동
+		return "redirect:/BoardList";
+	}
 	
 }

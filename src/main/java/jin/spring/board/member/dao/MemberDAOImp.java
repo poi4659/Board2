@@ -42,4 +42,11 @@ public class MemberDAOImp implements MemberDAO{
 		sqlSessionTemplate.update("jin.spring.member.update", memberDTO);
 	}
 
+//	회원탈퇴 
+//	서비스에서 전달한 MemberDTO를 기준으로 DB에서 해당 회원 데이터를 삭제
+	@Override
+	public void delete(MemberDTO memberDTO) throws Exception {
+		sqlSessionTemplate.delete("jin.spring.member.delete", memberDTO);
+	}
+
 }

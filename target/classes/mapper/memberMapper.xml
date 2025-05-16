@@ -23,4 +23,10 @@
 		UPDATE member SET mbpw = #{mbPw}, mbname = #{mbName}
 		where mbid = #{mbId}
 	</update>
+
+	<!-- 회원탈퇴 -->
+	<delete id="delete">
+		DELETE FROM MEMBER
+		WHERE mbid = #{mbId} AND mbpw = #{mbPw}
+	</delete>
 </mapper>

@@ -38,4 +38,12 @@ public class MemberServiceImp implements MemberService{
 		memberDAO.update(memberDTO);
 	}
 
+	
+//	회원탈퇴
+	@Override
+	public void memberDelete(MemberDTO memberDTO) throws Exception {
+//		파라미터로 받은 삭제할 회원 정보를 DAO로 넘겨줌
+		memberDAO.delete(memberDTO);
+	}
+
 }
