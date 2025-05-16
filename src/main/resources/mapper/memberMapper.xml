@@ -13,7 +13,14 @@
 
 	<!-- 로그인 -->
 	<select id="login" resultType="MemberDTO">
-		select mbid, mbpw from member
+		select mbid, mbpw, mbname from
+		member
 		where mbid = #{mbId} AND mbpw = #{mbPw}
 	</select>
+
+	<!-- 회원정보 수정 -->
+	<update id="update">
+		UPDATE member SET mbpw = #{mbPw}, mbname = #{mbName}
+		where mbid = #{mbId}
+	</update>
 </mapper>

@@ -51,7 +51,8 @@ li {
 				<!-- 로그인된 상태라면 -->
 				<c:if test="${member != null}">
 					<div class="col-md-auto ms-auto">
-						<a href="#" class="btn text-white border-0 bg-transparent">${member.mbId}님</a>
+						<!-- 아이디 클릭시 회원 정보 수정할 수 있는 마이페이지로 이동 -->
+						<a href="./MemberMypage" class="btn text-white border-0 bg-transparent">${member.mbId}님</a>
 						<a href="./MemberLogout" class="btn text-white border-0 bg-transparent">로그아웃</a>
 					</div>
 				</c:if>

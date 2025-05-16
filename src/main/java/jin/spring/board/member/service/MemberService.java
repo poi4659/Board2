@@ -8,4 +8,8 @@ public interface MemberService {
 	
 //	로그인 
 	public MemberDTO memberLogin(MemberDTO memberDTO) throws Exception;
+	
+//	회원정보 수정 
+	public void memberUpdate(MemberDTO memberDTO) throws Exception;
+
 }

@@ -84,8 +84,6 @@ public class MemberController {
 		return "redirect:/BoardList";
 	}
 	
-	
-	
 //	logout
 //	HttpSession 객체는 현재 사용자의 세션을 나타냄 
 //	이 메서드에서 이 세션을 끊는 작업을 함 
@@ -98,5 +96,40 @@ public class MemberController {
 //		로그아웃 후 게시판 목록으로 이동
 		return "redirect:/BoardList";
 	}
+	
+//	마이페이지 뷰 GET
+//	로그인하면 회원 정보가 session에 있어서 쓸 수 있음 
+	@GetMapping("/MemberMypage")
+	public String mypage() {
+		logger.info("마이페이지 폼 뷰");
+		
+//		마이페이지 뷰 반환 
+		return "./member/member_mypage";
+	}
+	
+//	회원정보 수정 뷰 GET	
+//	로그인하면 회원 정보가 session에 있어서 쓸 수 있음 
+	@GetMapping("/MemberUpdate")
+	public String update() {
+		logger.info("회원정보 수정 폼 뷰");
+		
+//		회원정보 수정 뷰 반환 
+		return "./member/member_update";
+	}
+	
+//	회원정보 수정 POST
+	@PostMapping("/MemberUpdate")
+	public String update(MemberDTO memberDTO, HttpSession session) throws Exception {
+//		파라미터를 서비스로 보내줌 
+		memberService.memberUpdate(memberDTO);
+		
+		
+//		회원정보 수정 후에 세션 끊음 
+		session.invalidate();
+		
+//		로그인 페이지로 리다이렉트함  
+		return "redirect:/MemberLogin";
+	}
+	
 	
 }

@@ -31,4 +31,11 @@ public class MemberServiceImp implements MemberService{
 		return memberDAO.login(memberDTO);
 	}
 
+//	회원정보 수정 
+	@Override
+	public void memberUpdate(MemberDTO memberDTO) throws Exception {
+//		수정할 회원 정보를 담은 DTO를 DAO로 넘겨 DB에서 업데이트
+		memberDAO.update(memberDTO);
+	}
+
 }

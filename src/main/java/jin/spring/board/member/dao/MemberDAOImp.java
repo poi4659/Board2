@@ -33,4 +33,13 @@ public class MemberDAOImp implements MemberDAO{
 		return sqlSessionTemplate.selectOne("jin.spring.member.login", memberDTO);
 	}
 
+
+//	회원정보 수정
+//	서비스에서 보낸 파라미터들을 update(MemberDTO memberDTO)에 담음 
+	@Override
+	public void update(MemberDTO memberDTO) throws Exception {
+//		memberDTO에 있는 회원 정보를 기준으로 DB에 있는 데이터를 수정
+		sqlSessionTemplate.update("jin.spring.member.update", memberDTO);
+	}
+
 }
