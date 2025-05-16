@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,31 +14,65 @@
 <script src="./js/jquery.validate.min.js" type="text/javascript"></script>
 
 <script>
-    $(document).ready(function() {
-        $("form").submit(function(event) {
-            var mbId = $("#mbId").val().trim();
-            var mbPw = $("#mbPw").val().trim();
-            var mbName = $("#mbName").val().trim();
+	$(document).ready(function() {
+		$("#idChk").click(function() {
+			var mbIdVal = $("#mbId").val().trim();
+			if (mbIdVal === "") {
+				alert("아이디를 입력하세요.");
+				$("#mbId").focus();
+				return;
+			}
 
-            if (mbId === "") {
-                alert("아이디를 입력하세요.");
-                $("#mbId").focus();
-                return false; // 폼 제출 방지
-            }
+			$.ajax({
+				url : "./MemberIdChk",
+				type : "post",
+				dataType : "json",
+				data : {
+					"mbId" : mbIdVal
+				},
+				success : function(data) {
+					if (data === 1) {
+						alert("중복된 아이디입니다.");
+						$("#idChk").val("N");
+					} else if (data === 0) {
+						alert("사용가능한 아이디입니다.");
+						$("#idChk").val("Y");
+					}
+				},
+				error : function() {
+					alert("서버 오류가 발생했습니다.");
+				}
+			});
+		});
 
-            if (mbPw === "") {
-                alert("비밀번호를 입력하세요.");
-                $("#mbPw").focus();
-                return false; // 폼 제출 방지
-            }
+		// 폼 submit 시 중복 확인 상태 체크
+		$("#regForm").submit(function(event) {
+			var mbId = $("#mbId").val().trim();
+			var mbPw = $("#mbPw").val().trim();
+			var mbName = $("#mbName").val().trim();
+			var idChkVal = $("#idChk").val();
 
-            if (mbName === "") {
-                alert("이름을 입력하세요.");
-                $("#mbName").focus();
-                return false; // 폼 제출 방지
-            }
-        });
-    });
+			if (mbId === "") {
+				alert("아이디를 입력하세요.");
+				$("#mbId").focus();
+				return false;
+			}
+			if (mbPw === "") {
+				alert("비밀번호를 입력하세요.");
+				$("#mbPw").focus();
+				return false;
+			}
+			if (mbName === "") {
+				alert("이름을 입력하세요.");
+				$("#mbName").focus();
+				return false;
+			}
+			if (idChkVal !== "Y") {
+				alert("중복확인 버튼을 눌러주세요.");
+				return false;
+			}
+		});
+	});
 </script>
 
 
@@ -62,25 +98,32 @@
 						</div>
 						<div class="card-body">
 							<%-- 폼 데이터를 서버에 POST 방식으로 전송 --%>
-							<form method="post" action="./MemberRegister">
+							<form method="post" action="./MemberRegister" id="regForm">
 								<fieldset>
 									<div class="form-group row">
 										<label for="mbId" class="ml-sm-3 col-form-label"> 아이디 </label>
 										<div class="ml-sm-3">
 											<%-- 각 항목에 대해 name 속성은 서버에서 데이터를 받는 키로 사용->DTO랑 맞추기 --%>
-											<input type="text" name="mbId" id="mbId" class="form-control form-control-sm">
+											<input type="text" name="mbId" id="mbId"
+												class="form-control form-control-sm"
+											>
+											<button type="button" class="btn btn-secondary" id="idChk" value="N">중복확인</button>
 										</div>
 									</div>
 									<div class="form-group row">
 										<label for="mbPw" class="ml-sm-3 col-form-label"> 패스워드 </label>
 										<div class="ml-sm-3">
-											<input type="password" name="mbPw" id="mbPw" class="form-control form-control-sm">
+											<input type="password" name="mbPw" id="mbPw"
+												class="form-control form-control-sm"
+											>
 										</div>
 									</div>
 									<div class="form-group row">
 										<label for="mbName" class="ml-sm-3 col-form-label"> 이름 </label>
 										<div class="ml-sm-3">
-											<input type="text" name="mbName" id="mbName" class="form-control form-control-sm">
+											<input type="text" name="mbName" id="mbName"
+												class="form-control form-control-sm"
+											>
 										</div>
 									</div>
 									<div class="form-group">

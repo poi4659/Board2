@@ -15,4 +15,8 @@ public interface MemberService {
 //	회원탈퇴  
 	public void memberDelete(MemberDTO memberDTO) throws Exception;
 
+//	아이디 중복 체크
+	public int memberIdChk(MemberDTO memberDTO) throws Exception;
+
+	
 }

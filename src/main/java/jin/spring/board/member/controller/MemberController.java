@@ -11,6 +11,7 @@ import jin.spring.board.member.service.MemberServiceImp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,10 +21,6 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
-
-    private final BoardController boardController;
-
-    private final MemberServiceImp memberServiceImp;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 	private final MemberService memberService;
@@ -42,7 +39,19 @@ public class MemberController {
 	public String register(MemberDTO memberDTO) throws Exception {
 		logger.info("회원가입");
 		
-		memberService.memberRegister(memberDTO);
+		int result = memberService.memberIdChk(memberDTO);
+		
+		try {
+//			1이면 아이디가 중복된 것이기에 다시 회원가입 폼 뷰 보냄 
+			if (result == 1) {
+				return "./member/member_register";
+			} else if (result == 0){
+//				결과가 0이면 중복된 아이디가 없기에 회원가입 실행
+				memberService.memberRegister(memberDTO);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException();
+		}
 		
 //		게시판 목록으로 이동
 		return "redirect:/BoardList";
@@ -174,5 +183,18 @@ public class MemberController {
 //		게시판 목록으로 이동
 		return "redirect:/BoardList";
 	}
+	
+	
+//	아이디 중복 체크
+//	AJAX 요청으로 이 메서드가 호출되면, 서버가 즉시 중복 여부 결과(1 or 0)를 반환
+	@ResponseBody
+	@PostMapping("/MemberIdChk")
+	public int idChk(MemberDTO memberDTO) throws Exception {
+//		전달받은 MemberDTO 객체에서 아이디 값을 추출
+		int result = memberService.memberIdChk(memberDTO);
+//		결과(중복 여부)를 int로 반환
+		return result;
+	}
+	
 	
 }

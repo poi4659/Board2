@@ -14,4 +14,8 @@ public interface MemberDAO {
 	
 //	회원탈퇴 
 	public void delete(MemberDTO memberDTO) throws Exception;
+	
+//	아이디 중복체크 
+	public int idChk(MemberDTO memberDTO) throws Exception;
+
 }

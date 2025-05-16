@@ -46,4 +46,14 @@ public class MemberServiceImp implements MemberService{
 		memberDAO.delete(memberDTO);
 	}
 
+//	아이디 중복 체크
+//	컨트롤러로부터 전달받은 MemberDTO 객체를 이용해,
+	@Override
+	public int memberIdChk(MemberDTO memberDTO) throws Exception {
+	//  DAO 계층의 idChk() 메서드를 호출하여 아이디 중복 여부를 검사한 뒤,
+	//  그 결과를 다시 컨트롤러에 반환
+		int result = memberDAO.idChk(memberDTO); 
+		return result;
+	}
+
 }

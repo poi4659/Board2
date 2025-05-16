@@ -49,4 +49,14 @@ public class MemberDAOImp implements MemberDAO{
 		sqlSessionTemplate.delete("jin.spring.member.delete", memberDTO);
 	}
 
+
+//	아이디 중복 체크
+//	결과값(0 또는 1) 리턴 
+	@Override
+	public int idChk(MemberDTO memberDTO) throws Exception {
+//		memberDTO 객체 안에는 사용자가 입력한 userId 값이 들어있음
+		int result = sqlSessionTemplate.selectOne("jin.spring.member.idChk", memberDTO);
+		return result;
+	}
+
 }
