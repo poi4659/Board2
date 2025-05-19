@@ -15,19 +15,26 @@
 	<select id="login" resultType="MemberDTO">
 		select mbid, mbpw, mbname from
 		member
-		where mbid = #{mbId} AND mbpw = #{mbPw}
+		where mbid = #{mbId}
+		<!-- 비밀번호 체크할때 암호화된 비밀번호와 입력된 비밀번호를 비교 해주기 때문에 주석처리 -->
+		<!-- AND mbpw =	#{mbPw} -->
 	</select>
 
 	<!-- 회원정보 수정 -->
 	<update id="update">
-		UPDATE member SET mbpw = #{mbPw}, mbname = #{mbName}
+		UPDATE member SET 
+		<!-- 비밀번호 체크할때 암호화된 비밀번호와 입력된 비밀번호를 비교 해주기 때문에 주석처리 -->
+		<!-- mbpw = #{mbPw}, -->
+		mbname = #{mbName}
 		where mbid = #{mbId}
 	</update>
 
 	<!-- 회원탈퇴 -->
 	<delete id="delete">
 		DELETE FROM MEMBER
-		WHERE mbid = #{mbId} AND mbpw =	#{mbPw}
+		WHERE mbid = #{mbId} 
+		<!-- 비밀번호 체크할때 암호화된 비밀번호와 입력된 비밀번호를 비교 해주기 때문에 주석처리 -->
+		<!-- AND mbpw =	#{mbPw} -->
 	</delete>
 
 	<!-- 아이디 중복 체크 -->

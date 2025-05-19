@@ -13,19 +13,45 @@
 <script src="./js/bootstrap.min_4.5.0.js" type="text/javascript"></script>
 <script src="./js/jquery.validate.min.js" type="text/javascript"></script>
 
+
 <script>
-	$(document).ready(function() {
-		$("form").submit(function(event) {
-			var mbPw = $("#mbPw").val().trim();
+$(document).ready(function() {
+    $("#deleteForm").on("submit", function(event) {
+        event.preventDefault(); // 기본 submit 막기
 
-			if (mbPw === "") {
-				alert("비밀번호를 입력하세요.");
-				$("#mbPw").focus();
-				return false; // 폼 제출 방지
-			}
+		var mbPw = $("#mbPw").val().trim();
 
-		});
-	});
+		if (mbPw === "") {
+			alert("비밀번호를 입력하세요.");
+			$("#mbPw").focus();
+			return false; // 폼 제출 방지
+		}
+
+
+        // AJAX로 비밀번호 확인
+        $.ajax({
+            url: "./MemberPwdChk",
+            type: "post",
+            dataType: "json",
+            data: $("#deleteForm").serializeArray(),
+            success: function(data) {
+                if (data === true) {
+                    if (confirm("회원탈퇴 하시겠습니까?")) {
+                        // 실제로 DOM의 submit 호출 (무한루프 방지용)
+                        document.getElementById("deleteForm").submit();
+                    }
+                } else {
+                    alert("비밀번호가 틀렸습니다.");
+                }
+            },
+            error: function() {
+                alert("서버 오류가 발생했습니다.");
+            }
+        });
+
+        return false;
+    });
+});
 </script>
 
 
@@ -51,7 +77,7 @@
 						</div>
 						<div class="card-body">
 							<%-- 폼 데이터를 서버에 POST 방식으로 전송 --%>
-							<form method="post" action="./MemberDelete">
+							<form method="post" action="./MemberDelete" id="deleteForm">
 								<fieldset>
 									<div class="form-group row">
 										<label for="mbId" class="ml-sm-3 col-form-label"> 아이디 </label>
@@ -65,7 +91,7 @@
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="mbPw" class="ml-sm-3 col-form-label"> 패스워드 </label>
+										<label for="mbPw" class="ml-sm-3 col-form-label"> 비밀번호 </label>
 										<div class="ml-sm-3">
 											<input type="password" name="mbPw" id="mbPw"
 												class="form-control form-control-sm">
