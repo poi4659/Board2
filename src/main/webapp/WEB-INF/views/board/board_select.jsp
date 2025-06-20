@@ -126,8 +126,7 @@ li {
 							<c:if test="${member == null}">
 								<div>
 									<%-- 클릭 시 ./MemberLogin로 이동하여 로그인을 할 수 있는 페이지로 리디렉션 --%>
-									<a href="./MemberLogin" class="btn btn-success btn-block"> 로그인 후에
-										작성할 수 있습니다.</a>
+									<a href="./MemberLogin" class="btn btn-success btn-block">게시글 작성</a>
 								</div>
 							</c:if>
 

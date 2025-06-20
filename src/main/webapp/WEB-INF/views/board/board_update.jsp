@@ -12,6 +12,28 @@
 <script src="./js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="./js/dept_validity.js" type="text/javascript"></script>
 </head>
+
+<script>
+    $(document).ready(function() {
+        $("form").submit(function(event) {
+            var title = $("#bdTitle").val().trim();
+            var content = $("#bdContent").val().trim();
+
+            if (title === "") {
+                alert("제목을 입력하세요.");
+                $("#bdTitle").focus();
+                return false; // 폼 제출 방지
+            }
+
+            if (content === "") {
+                alert("내용을 입력하세요.");
+                $("#bdContent").focus();
+                return false; // 폼 제출 방지
+            }
+        });
+    });
+</script>
+
 <body>
 	<header id="main-header" class="py-2 btn-dark text-white">
 		<div class="container">
