@@ -110,13 +110,13 @@ $(document).ready(function() {
 									</div>
 									<div class="form-group">
 										<%-- 사용자가 입력한 데이터를 서버로 제출하는 버튼 --%>
-										<button type="submit" class="btn btn-secondary" id="cancelBtn">회원탈퇴</button>
+										<button type="submit" class="btn btn-secondary" id="memberDeleteBtn">회원탈퇴</button>
 									</div>
 								</fieldset>
 							</form>
 							<div>
 								<%-- 버튼을 클릭하면 게시글 목록 페이지로 리디렉션 --%>
-								<a href="./BoardList" class="btn btn-primary btn-block"> 게시글 목록 </a>
+								<a href="./BoardList" class="btn btn-primary btn-block" id="boardListBtn"> 게시글 목록 </a>
 							</div>
 
 							

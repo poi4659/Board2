@@ -46,10 +46,10 @@
 								<tbody>
 									<tr class="text-center">
 										<!-- BoardDTO의 bNum, bTitle 등을 출력 -->
-										<td>${boardDTO.bdNum}</td>
-										<td>${boardDTO.bdTitle}</td>
-										<td>${boardDTO.bdWriter}</td>
-										<td><fmt:formatDate value="${boardDTO.regDate}"
+										<td id="bdNum">${boardDTO.bdNum}</td>
+										<td id="bdTitle">${boardDTO.bdTitle}</td>
+										<td id="bdWriter">${boardDTO.bdWriter}</td>
+										<td id="regDate"><fmt:formatDate value="${boardDTO.regDate}"
 												pattern="yyyy-MM-dd"
 											/></td>
 									</tr>
@@ -57,7 +57,7 @@
 
 								<tbody>
 									<tr class="text-left">
-										<td colspan="4">${boardDTO.bdContent}</td>
+										<td colspan="4" id="bdContent">${boardDTO.bdContent}</td>
 									</tr>
 								</tbody>
 
@@ -65,18 +65,18 @@
 							<div class="row">
 								<div class="col-md-4">
 									<%-- 게시글 목록 버튼을 클릭하면, 게시글 목록 페이지로 리디렉션 --%>
-									<a href="./BoardList" class="btn btn-primary btn-block"> 게시글 목록 </a>
+									<a href="./BoardList" class="btn btn-primary btn-block" id="boardListBtn"> 게시글 목록 </a>
 								</div>
 								<div class="col-md-4">
 									<%-- 게시글 수정 버튼을 클릭하면, bdNum 값을 URL 파라미터로 전달하면서 게시글 수정 페이지로 리디렉션 --%>
 									<a href="./BoardUpdate?bdNum=${boardDTO.bdNum}"
-										class="btn btn-warning btn-block"
+										class="btn btn-warning btn-block" id="boardUpdateBtn"
 									> 게시글 수정 </a>
 								</div>
 								<div class="col-md-4">
 									<%-- 게시글 삭제 버튼을 클릭하면, bdNum 값을 URL 파라미터로 전달하면서 게시글 삭제 페이지로 이동 --%>
 									<a href="./BoardDelete?bdNum=${boardDTO.bdNum}"
-										class="btn btn-danger btn-block"
+										class="btn btn-danger btn-block" id="boardDeleteBtn"
 									> 게시글 삭제 </a>
 								</div>
 							</div>

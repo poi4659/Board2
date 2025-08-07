@@ -76,7 +76,7 @@
 							</form>
 							<div class="row">
 								<div class="col-md-12">
-									<a href="./BoardList" class="btn btn-primary btn-block"> 게시글 목록 </a>
+									<a href="./BoardList" class="btn btn-primary btn-block" id="boardListBtn"> 게시글 목록 </a>
 								</div>
 							</div>
 						</div>

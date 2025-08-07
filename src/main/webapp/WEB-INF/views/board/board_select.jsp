@@ -101,7 +101,7 @@ li {
 											<td><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd" /></td>
 											<%-- 번호를 URL 파라미터로 넘겨서 상세 페이지로 이동 --%>
 											<td><a href="./BoardSelect?bdNum=${list.bdNum}"
-												class="btn btn-outline-info"
+												class="btn btn-outline-info" id="boardDetailBtn"
 											> 게시글 상세 보기 </a></td>
 										</tr>
 									</c:forEach>
@@ -118,7 +118,7 @@ li {
 							<c:if test="${member != null}">
 								<div>
 									<%-- 클릭 시 ./BoardInsert로 이동하여 게시글 내용을 입력할 수 있는 페이지로 리디렉션 --%>
-									<a href="./BoardInsert" class="btn btn-success btn-block"> 게시글 작성</a>
+									<a href="./BoardInsert" class="btn btn-success btn-block" id="boardInsertBtn"> 게시글 작성</a>
 								</div>
 							</c:if>
 
@@ -126,7 +126,7 @@ li {
 							<c:if test="${member == null}">
 								<div>
 									<%-- 클릭 시 ./MemberLogin로 이동하여 로그인을 할 수 있는 페이지로 리디렉션 --%>
-									<a href="./MemberLogin" class="btn btn-success btn-block">게시글 작성</a>
+									<a href="./MemberLogin" class="btn btn-success btn-block" id="boardInsertBtn">게시글 작성</a>
 								</div>
 							</c:if>
 

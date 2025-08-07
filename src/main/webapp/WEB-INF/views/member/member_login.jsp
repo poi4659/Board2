@@ -80,7 +80,7 @@
 							</form>
 							<div>
 								<%-- 버튼을 클릭하면 게시글 목록 페이지로 리디렉션 --%>
-								<a href="./BoardList" class="btn btn-primary btn-block"> 게시글 목록 </a>
+								<a href="./BoardList" class="btn btn-primary btn-block" id="boardListBtn"> 게시글 목록 </a>
 							</div>
 						</div>
 					</div>

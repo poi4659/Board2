@@ -59,15 +59,15 @@
 							<div class="row">
 								<div class="col-md-4">
 									<%-- 버튼을 클릭하면 회원정보 수정 페이지로 리디렉션 --%>
-									<a href="./MemberUpdate" class="btn btn-primary btn-block"> 회원정보 수정
+									<a href="./MemberUpdate" class="btn btn-primary btn-block" id="memberUpdateBtn"> 회원정보 수정
 							 		</a>
 								</div>
 								<div class="col-md-4">
-									<a href="./BoardList" class="btn btn-warning btn-block"> 게시글 목록 </a>
+									<a href="./BoardList" class="btn btn-warning btn-block" id="boardListBtn"> 게시글 목록 </a>
 								</div>
 								<div class="col-md-4">
 									<%-- 버튼을 클릭하면 회원탈퇴 페이지로 리디렉션 --%>
-									<a href="./MemberDelete" class="btn btn-danger btn-block"> 회원탈퇴 </a>
+									<a href="./MemberDelete" class="btn btn-danger btn-block" id="memberDeleteBtn"> 회원탈퇴 </a>
 								</div>
 							</div>
 						</div>
