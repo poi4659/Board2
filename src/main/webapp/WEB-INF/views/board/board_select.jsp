@@ -78,7 +78,7 @@ li {
 				<div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
-							<h5>게시판 목록</h5>
+							<h5>게시글 목록</h5>
 						</div>
 						<div class="card-body">
 							<table class="table table-hover">

@@ -110,9 +110,7 @@ $(document).ready(function() {
 									</div>
 									<div class="form-group">
 										<%-- 사용자가 입력한 데이터를 서버로 제출하는 버튼 --%>
-										<button type="submit" class="btn btn-secondary">회원탈퇴</button>
-										<%-- 폼을 초기화하여 입력된 데이터를 지우는 버튼 --%>
-										<button type="reset" class="btn btn-secondary">취소</button>
+										<button type="submit" class="btn btn-secondary" id="cancelBtn">회원탈퇴</button>
 									</div>
 								</fieldset>
 							</form>

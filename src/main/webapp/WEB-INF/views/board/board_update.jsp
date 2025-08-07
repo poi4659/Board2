@@ -81,24 +81,16 @@
 									</div>
 									<div class="form-group">
 										<%-- 사용자가 입력한 데이터를 서버로 제출하는 버튼 --%>
-										<button type="submit" class="btn btn-secondary">수정</button>
+										<button type="submit" class="btn btn-secondary" id="updateBtn">수정</button>
 										<%-- 폼을 초기화하여 입력된 데이터를 지우는 버튼 --%>
-										<button type="reset" class="btn btn-secondary">취소</button>
+										<button type="reset" class="btn btn-secondary" id="resetBtn">입력 초기화</button>
 									</div>
 								</fieldset>
 							</form>
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-md-12">
 									<%-- BoardSelect 페이지로 이동하는 링크로, 게시글 목록을 확인할 수 있음 --%>
 									<a href="./BoardList" class="btn btn-primary btn-block"> 게시글 목록 </a>
-								</div>
-								<div class="col-md-4">
-									<%-- 새로운 게시글을 입력할 수 있는 페이지로 이동하는 링크 --%>
-									<a href="./BoardInsert" class="btn btn-success btn-block"> 게시글 등록</a>
-								</div>
-								<div class="col-md-4">
-									<%-- 현재 수정 중인 게시글 번호를 삭제하는 링크. bdNum 파라미터를 URL에 포함시켜 삭제할 게시글 번호를 전달 --%>
-									<a href="./BoardDelete?bdNum=${param.bdNum}" class="btn btn-danger btn-block"> 게시글 삭제 </a>
 								</div>
 							</div>
 						</div>

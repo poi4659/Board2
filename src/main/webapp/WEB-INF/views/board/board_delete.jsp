@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,39 +43,40 @@
 											<input type="hidden" id="bdNum" name="bdNum" value="${param.bdNum}" />
 
 											<%-- 작성자는 수정할 수 없도록 readonly 속성으로 설정 --%>
-											<label for="bdWriter" class="ml-sm-3 col-form-label text-right"> 작성자 </label> 
-											<input type="text" name="bdWriter" id="bdWriter" class="form-control form-control-sm bg-white" value="${boardDTO.bdWriter}" readonly>
+											<label for="bdWriter" class="ml-sm-3 col-form-label text-right">
+												작성자 </label> <input type="text" name="bdWriter" id="bdWriter"
+												class="form-control form-control-sm bg-white"
+												value="${boardDTO.bdWriter}" readonly
+											>
 										</div>
 									</div>
 									<div class="form-group row">
 										<label for="bdTitle" class="ml-sm-3 col-form-label"> 제목 </label>
 										<div class="ml-sm-3">
-											<input type="text" name="bdTitle" id="bdTitle" class="form-control form-control-sm" value="${boardDTO.bdTitle}" readonly>
+											<input type="text" name="bdTitle" id="bdTitle"
+												class="form-control form-control-sm bg-white" value="${boardDTO.bdTitle}"
+												readonly
+											>
 										</div>
 									</div>
 									<div class="form-group row">
 										<label for="bdContent" class="ml-sm-3 col-form-label"> 내용 </label>
 										<div class="ml-sm-3">
-											<input type="text" name="bdContent" id="bdContent" class="form-control form-control-sm" value="${boardDTO.bdContent}" readonly>
+											<input type="text" name="bdContent" id="bdContent"
+												class="form-control form-control-sm bg-white" value="${boardDTO.bdContent}"
+												readonly
+											>
 										</div>
 									</div>
 									<div class="form-group">
 										<%-- 사용자가 입력한 데이터를 서버로 제출하는 버튼 --%>
-										<button type="submit" class="btn btn-secondary">삭제</button>
-										<%-- 폼을 초기화하여 입력된 데이터를 지우는 버튼 --%>
-										<button type="reset" class="btn btn-secondary">취소</button>
+										<button type="submit" class="btn btn-secondary" id="deleteBtn">게시글 삭제</button>
 									</div>
 								</fieldset>
 							</form>
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-md-12">
 									<a href="./BoardList" class="btn btn-primary btn-block"> 게시글 목록 </a>
-								</div>
-								<div class="col-md-4">
-									<a href="./BoardInsert" class="btn btn-success btn-block"> 게시글 등록 </a>
-								</div>
-								<div class="col-md-4">
-									<a href="./BoardUpdate?bdNum=${param.bdNum}" class="btn btn-warning btn-block"> 게시글 수정 </a>
 								</div>
 							</div>
 						</div>
