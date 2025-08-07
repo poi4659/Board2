@@ -15,14 +15,22 @@
 
 <script>
 	$(document).ready(function() {
+		// 아이디 값이 바뀌면 중복확인 상태 초기화
+	    $("#mbId").on("input", function() {
+	        $("#idChk").val("N");
+	    });
+		 
+		// 중복 확인 버튼 클릭
 		$("#idChk").click(function() {
 			var mbIdVal = $("#mbId").val().trim();
+			// 아이디를 입력하지 않고 중복확인버튼 클릭시 
 			if (mbIdVal === "") {
 				alert("아이디를 입력하세요.");
 				$("#mbId").focus();
 				return;
 			}
 
+			// 아작스 사용해서 페이지 새로고침 없이 중복 여부만 확인
 			$.ajax({
 				url : "./MemberIdChk",
 				type : "post",
