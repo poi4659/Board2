@@ -92,7 +92,8 @@ public class MemberController {
 
 			boolean pwdMatch = false;
 			
-//			DB 비밀번호가 bcrypt 형식인지 확인
+//			1. 입력한 비밀번호와 DB에 저장된 비밀번호 일치 여부 확인
+//			DB 비밀번호가 bcrypt 형식이라면 암호와 검증 진행 
 //			bcrypt 암호화 문자열 특징($2a$로 시작 
 			if (dbPw != null && dbPw.startsWith("$2a$")) {
 //				평문 입력(inputPw)과 암호화된 비밀번호(dbPw) 비교
@@ -102,19 +103,31 @@ public class MemberController {
 		        pwdMatch = dbPw.equals(inputPw);
 			}
 			
-//			아이디가 존재하고 비밀번호가 일치할 경우
-			if (login != null && pwdMatch == true) {
+			if(pwdMatch) {
+//				pwdMatch == true: 비밀번호가 일치
 //				로그인 성공이라면 로그인된 MemberDTO 객체 전체를 세션에 저장
 				session.setAttribute("member", login);
+//				로그인 성공 시 게시판 목록 페이지로 이동 
+				return "redirect:/BoardList";
 			} else {
+//				pwdMatch == false: 비밀번호가 일치하지 않음
 //				로그인이 안된 상태라면 세션에 null 저장 
 				session.setAttribute("member", null);
 //				실패 메시지 전달->jsp에서 사용 가능 
-				rttr.addFlashAttribute("msg", false);
+				rttr.addFlashAttribute("msg", "fail");
+//				로그인 실패 시 로그인 페이지 유지 
+				return "redirect:/MemberLogin";
 			}
+			
+		} else {
+//			login == null: 아이디가 없는 경우도 실패 처리
+			session.setAttribute("member", null);
+//			실패 메시지 전달->jsp에서 사용 가능 
+			rttr.addFlashAttribute("msg", "fail");
+//			로그인 실패 시 로그인 페이지 유지 
+			return "redirect:/MemberLogin";
 		}
-//		로그인 성공/실패 후 게시판 목록 페이지로 이동 
-		return "redirect:/BoardList";
+
 	}
 
 //	logout

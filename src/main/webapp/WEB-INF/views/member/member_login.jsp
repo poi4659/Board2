@@ -1,4 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,30 +16,38 @@
 <script src="./js/jquery.validate.min.js" type="text/javascript"></script>
 
 <script>
-    $(document).ready(function() {
-        $("form").submit(function(event) {
-            var mbId = $("#mbId").val().trim();
-            var mbPw = $("#mbPw").val().trim();
+	$(document).ready(function() {
+		$("form").submit(function(event) {
+			var mbId = $("#mbId").val().trim();
+			var mbPw = $("#mbPw").val().trim();
 
-            if (mbId === "") {
-                alert("아이디를 입력하세요.");
-                $("#mbId").focus();
-                return false; // 폼 제출 방지
-            }
+			if (mbId === "") {
+				alert("아이디를 입력하세요.");
+				$("#mbId").focus();
+				return false; // 폼 제출 방지
+			}
 
-            if (mbPw === "") {
-                alert("비밀번호를 입력하세요.");
-                $("#mbPw").focus();
-                return false; // 폼 제출 방지
-            }
+			if (mbPw === "") {
+				alert("비밀번호를 입력하세요.");
+				$("#mbPw").focus();
+				return false; // 폼 제출 방지
+			}
 
-        });
-    });
+		});
+	});
 </script>
 
 
 </head>
 <body>
+	<c:if test="${msg == 'fail'}">
+		<script type="text/javascript">
+			window.addEventListener('load', function() {
+				alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+			});
+		</script>
+	</c:if>
+
 	<header id="main-header" class="py-2 btn-dark text-white">
 		<div class="container">
 			<div class="row">
@@ -62,13 +74,17 @@
 										<label for="mbId" class="ml-sm-3 col-form-label"> 아이디 </label>
 										<div class="ml-sm-3">
 											<%-- 각 항목에 대해 name 속성은 서버에서 데이터를 받는 키로 사용->DTO랑 맞추기 --%>
-											<input type="text" name="mbId" id="mbId" class="form-control form-control-sm">
+											<input type="text" name="mbId" id="mbId"
+												class="form-control form-control-sm"
+											>
 										</div>
 									</div>
 									<div class="form-group row">
 										<label for="mbPw" class="ml-sm-3 col-form-label"> 패스워드 </label>
 										<div class="ml-sm-3">
-											<input type="password" name="mbPw" id="mbPw" class="form-control form-control-sm">
+											<input type="password" name="mbPw" id="mbPw"
+												class="form-control form-control-sm"
+											>
 										</div>
 									</div>
 
@@ -80,7 +96,9 @@
 							</form>
 							<div>
 								<%-- 버튼을 클릭하면 게시글 목록 페이지로 리디렉션 --%>
-								<a href="./BoardList" class="btn btn-primary btn-block" id="boardListBtn"> 게시글 목록 </a>
+								<a href="./BoardList" class="btn btn-primary btn-block"
+									id="boardListBtn"
+								> 게시글 목록 </a>
 							</div>
 						</div>
 					</div>

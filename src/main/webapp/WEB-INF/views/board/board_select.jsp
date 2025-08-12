@@ -31,15 +31,6 @@ li {
 </style>
 </head>
 <body>
-	<c:if test="${not empty msg}">
-		<script type="text/javascript">
-			window.addEventListener('load', function() {
-				alert('아이디 또는 비밀번호가 올바르지 않습니다.');
-			});
-		</script>
-	</c:if>
-
-
 	<header id="main-header" class="py-2 btn-dark text-white">
 		<div class="container">
 			<div class="row align-items-center justify-content-between">
